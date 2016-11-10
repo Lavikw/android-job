@@ -614,9 +614,12 @@ public final class JobManager {
          */
         public void setAllowSmallerIntervalsForMarshmallow(boolean allowSmallerIntervals) {
             if (allowSmallerIntervals && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                throw new IllegalStateException("This method is only allowed to call on Android M or earlier");
+                CAT.i("A call to setAllowSmallerIntervalsForMarshmallow was overriden because we're on Android N or newer");
             }
-            mAllowSmallerIntervals = allowSmallerIntervals;
+            else
+            {
+                mAllowSmallerIntervals = allowSmallerIntervals;
+            }
         }
     }
 

@@ -106,11 +106,11 @@ public final class JobRequest {
     private static final CatLog CAT = new JobCat("JobRequest");
 
     /*package*/ static long getMinInterval() {
-        return JobManager.instance().getConfig().isAllowSmallerIntervalsForMarshmallow() ? TimeUnit.MINUTES.toMillis(1) : MIN_INTERVAL;
+        return JobManager.instance().getConfig().isAllowSmallerIntervalsForMarshmallow() ? TimeUnit.SECONDS.toMillis(10) : MIN_INTERVAL;
     }
 
     /*package*/ static long getMinFlex() {
-        return JobManager.instance().getConfig().isAllowSmallerIntervalsForMarshmallow() ? TimeUnit.SECONDS.toMillis(30) : MIN_FLEX;
+        return JobManager.instance().getConfig().isAllowSmallerIntervalsForMarshmallow() ? TimeUnit.SECONDS.toMillis(1) : MIN_FLEX;
     }
 
     private final Builder mBuilder;
@@ -801,6 +801,7 @@ public final class JobRequest {
          * @see #MIN_INTERVAL
          * @see #MIN_FLEX
          */
+
         public Builder setPeriodic(long intervalMs, long flexMs) {
             mIntervalMs = JobPreconditions.checkArgumentInRange(intervalMs, getMinInterval(), Long.MAX_VALUE, "intervalMs");
             mFlexMs = JobPreconditions.checkArgumentInRange(flexMs, getMinFlex(), mIntervalMs, "flexMs");
